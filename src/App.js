@@ -1,8 +1,10 @@
-// import logo from './logo.svg';
-import './App.css';
+import logo from './img/site-logo.webp';
+import './styles/App.css';
 import { DropzoneArea } from 'material-ui-dropzone';
 import { useState } from 'react';
-import TextFileStats from './components/TextFileStats'
+import TextFileStats from './components/TextFileStats';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 
 function App() {
 
@@ -10,7 +12,12 @@ function App() {
 
     return (
         <div className="App">
-            <header className="App-header">
+            <header>
+                <AppBar position="static">
+                    <Toolbar className="App-header">
+                        <img src={logo} alt="logo" />
+                    </Toolbar>
+                </AppBar>
             </header>
 
             <div id="main-container" className="App-main-content">

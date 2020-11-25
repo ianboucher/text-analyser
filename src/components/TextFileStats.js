@@ -17,7 +17,7 @@ export default function TextFileStats(props) {
     useEffect(() => readFile(files, setText));
 
     return (
-        <div id={id} data-testid={id} className="TestFileStats-grid">
+        <div files={files} id={id} data-testid={id} className="TestFileStats-grid">
 
             <div id="word-count" data-testid="word-count" className="TestFileStats-grid-item">
                 <Stat

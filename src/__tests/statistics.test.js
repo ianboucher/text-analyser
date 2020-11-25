@@ -4,7 +4,7 @@ import {
     getMeanWordLength,
     getModalWordLength,
     getMedianWordLength,
-    getMostCommonLetter
+    getMostCommonLetter,
 } from '../statistics'
 
 const faker = require('faker');
@@ -17,6 +17,7 @@ describe('getWordCount', () => {
         expect(getWordCount([])).toBe(0)
         expect(getWordCount(123)).toBe(0)
     });
+
     test('gets correct word count for empty string', () => {
         expect(getWordCount('')).toBe(0);
     });

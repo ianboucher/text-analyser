@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import App from '../App';
 
 test('renders file input container', () => {
@@ -31,7 +31,19 @@ test('file input accepts only a single file', () => {
     expect(fileInput).toHaveProperty('multiple', false);
 });
 
-test('renders file text stats', () => {
+test('file set on upload', async () => {
+    render(<App />);
+    const file = new File(['some text'], 'some_text.txt', { type: 'text/plain' });
+    const fileInput = screen.getByTestId('file-input');
+
+    fireEvent.change(fileInput, { target: { files: [file] } });
+
+    await waitFor(() => {
+        expect(screen.getByTestId('text-stats')).toHaveProperty('files', [file]);
+    });
+});
+
+test('renders file text stats component', () => {
     render(<App />);
     const textStats = screen.getByTestId('text-stats');
 

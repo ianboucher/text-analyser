@@ -1,0 +1,25 @@
+.TestFileStats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.TestFileStats-grid-item {
+    margin-bottom: 2rem;
+    width: calc(33% - 1rem);
+}
+
+@media (max-width: 720px) {
+    .TestFileStats-grid-item {
+        width: calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 600px) {
+    .TestFileStats-grid-item {
+        width: 100%;
+    }
+}

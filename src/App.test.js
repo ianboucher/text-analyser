@@ -29,3 +29,10 @@ test('file input accepts only a single file', () => {
 
     expect(fileInput).toHaveProperty('multiple', false);
 });
+
+test('renders file text stats', () => {
+    render(<App />);
+    const textStats = screen.getByTestId('text-stats');
+
+    expect(textStats).toBeInTheDocument();
+});

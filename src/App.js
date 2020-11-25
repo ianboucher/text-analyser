@@ -2,6 +2,7 @@
 import './App.css';
 import { DropzoneArea } from 'material-ui-dropzone';
 import { useState } from 'react';
+import TextFileStats from './components/TextFileStats'
 
 function App() {
 
@@ -21,6 +22,11 @@ function App() {
                         inputProps={{ 'data-testid': "file-input" }}
                     />
                 </div>
+
+                <TextFileStats
+                    id="text-stats"
+                    files={files}
+                />
             </div>
         </div>
     );

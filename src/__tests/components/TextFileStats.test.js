@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import TextFileStats from '../../components/TextFileStats';
 
-jest.mock('../statistics.js', () => {
+jest.mock('../../statistics.js', () => {
     return {
         getWordCount: () => 'MOCK_WORD_COUNT',
         getLineCount: () => 'MOCK_LINE_COUNT',

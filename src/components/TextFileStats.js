@@ -8,7 +8,7 @@ import {
     getMostCommonLetter,
     getWordCount
 } from '../statistics';
-import '../TextFileStats.css'
+import '../styles/TextFileStats.css'
 
 export default function TextFileStats(props) {
 

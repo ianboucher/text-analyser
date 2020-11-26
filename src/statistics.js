@@ -32,15 +32,12 @@ export function getMeanWordLength(string) {
 
 export function getModalWordLength(string) {
     if (!validInput(string)) {
-        return 0;
+        return [0];
     }
 
-    const wordLengths = getWordLengthFreqs(getWords(string));
-    const mode = Object.keys(wordLengths).reduce((prevMax, current) => {
-        return wordLengths[current] > wordLengths[prevMax] ? current : prevMax
-    });
+    const wordLengthFreqs = getWordLengthFreqs(getWords(string));
 
-    return parseInt(mode);
+    return takeKeysAtMaxFreq(wordLengthFreqs);
 }
 
 export function getMedianWordLength(string) {
@@ -65,10 +62,22 @@ export function getMostCommonLetter(string) {
     }
 
     const letterFreqs = getLetterFreqs(string)
-    return Object.keys(getLetterFreqs(string)).reduce((prevMax, current) => {
-        return letterFreqs[current] > letterFreqs[prevMax] ? current : prevMax;
-    });
+
+    return takeKeysAtMaxFreq(letterFreqs);
 }
+
+//TODO: MOVE THIS:
+function takeKeysAtMaxFreq(freqTable) {
+    const maxFreq = Math.max(...Object.values(freqTable));
+
+    return Object.keys(freqTable).reduce((acc, key) => {
+        if (freqTable[key] === maxFreq) {
+            acc.push(parseInt(key) || key);
+        }
+        return acc;
+    }, []);
+}
+
 
 function validInput(string) {
     return (typeof string === "string" && string.length !== 0);

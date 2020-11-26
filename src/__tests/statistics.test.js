@@ -175,19 +175,19 @@ describe('getMeanWordLength', () => {
 
 describe('getModalWordLength', () => {
     test('returns 0 for invalid inputs', () => {
-        expect(getModalWordLength(undefined)).toBe(0)
-        expect(getModalWordLength(null)).toBe(0)
-        expect(getModalWordLength([])).toBe(0)
-        expect(getModalWordLength(123)).toBe(0)
+        expect(getModalWordLength(undefined)).toEqual([0]);
+        expect(getModalWordLength(null)).toEqual([0]);
+        expect(getModalWordLength([])).toEqual([0]);
+        expect(getModalWordLength(123)).toEqual([0]);
     });
 
-    test('returns 0 mean word length for empty string', () => {
-        expect(getModalWordLength('')).toBe(0)
+    test('returns 0 modal word length for empty string', () => {
+        expect(getModalWordLength('')).toEqual([0]);
     });
 
     test('gets correct modal word length for text containing words of uniform length', () => {
         const text = Array(10).fill().map(() => faker.lorem.word(10)).join(' ');
-        expect(getModalWordLength(text)).toBe(10)
+        expect(getModalWordLength(text)).toEqual([10]);
     });
 
     test('gets correct modal word length for text containing words of varying length', () => {
@@ -196,18 +196,16 @@ describe('getModalWordLength', () => {
         const words5 = Array(7).fill().map(() => faker.lorem.word(5)).join(' ');
         const text = [words3, words4, words5].join(' ');
 
-        expect(getModalWordLength(text)).toBe(5)
+        expect(getModalWordLength(text)).toEqual([5]);
     });
 
-    test('returns lowest modal word length for in cases where there is more than 1 mode', () => {
-        // TODO: Return more than one mode value if max freqs are equal for more than 1 key
-
+    test('returns all modal values if max freqs are equal for more than 1 key', () => {
         const words3 = Array(5).fill().map(() => faker.lorem.word(3)).join(' ');
         const words4 = Array(7).fill().map(() => faker.lorem.word(4)).join(' ');
         const words5 = Array(7).fill().map(() => faker.lorem.word(5)).join(' ');
         const text = [words3, words4, words5].join(' ');
 
-        expect(getModalWordLength(text)).toBe(4);
+        expect(getModalWordLength(text)).toEqual([4, 5]);
     });
 
     test('ignores numbers when calculating modal word length', () => {
@@ -217,7 +215,7 @@ describe('getModalWordLength', () => {
         const numbers = Array(10).fill('111111111111  22222222 333333333333333').join(' ');
         const text = [words3, words4, words5, numbers].join(' ');
 
-        expect(getModalWordLength(text)).toBe(5);
+        expect(getModalWordLength(text)).toEqual([5]);
     });
 
     test('ignores special characters when calculating modal word length', () => {
@@ -227,25 +225,25 @@ describe('getModalWordLength', () => {
         const specialChars = Array(10).fill('@@@@@@@@@@  !!!!!!!!!!!! &&&&&&&&&&&&').join(' ');
         const text = [words3, words4, words5, specialChars].join(' ');
 
-        expect(getModalWordLength(text)).toBe(5);
+        expect(getModalWordLength(text)).toEqual([5]);
     });
 });
 
 describe('getMedianWordLength', () => {
     test('returns 0 for invalid input', () => {
-        expect(getMedianWordLength(undefined)).toBe(0)
-        expect(getMedianWordLength(null)).toBe(0)
-        expect(getMedianWordLength([])).toBe(0)
-        expect(getMedianWordLength(123)).toBe(0)
+        expect(getMedianWordLength(undefined)).toBe(0);
+        expect(getMedianWordLength(null)).toBe(0);
+        expect(getMedianWordLength([])).toBe(0);
+        expect(getMedianWordLength(123)).toBe(0);
     });
 
     test('returns 0 median word length for empty string', () => {
-        expect(getMedianWordLength('')).toBe(0)
+        expect(getMedianWordLength('')).toBe(0);
     });
 
     test('gets correct median word length for text containing words of uniform length', () => {
         const text = Array(10).fill().map(() => faker.lorem.word(10)).join(' ');
-        expect(getMedianWordLength(text)).toBe(10)
+        expect(getMedianWordLength(text)).toBe(10);
     });
 
     test('gets correct median word length for text containing words of varying length', () => {
@@ -254,7 +252,7 @@ describe('getMedianWordLength', () => {
         const words5 = Array(7).fill().map(() => faker.lorem.word(5)).join(' ');
         const text = [words3, words4, words5].join(' ');
 
-        expect(getMedianWordLength(text)).toBe(4)
+        expect(getMedianWordLength(text)).toBe(4);
     });
 
     test('gets correct median word length for even number of word lengths', () => {
@@ -264,7 +262,7 @@ describe('getMedianWordLength', () => {
         const words6 = Array(4).fill().map(() => faker.lorem.word(6)).join(' ');
         const text = [words3, words4, words5, words6].join(' ');
 
-        expect(getMedianWordLength(text)).toBe(5)
+        expect(getMedianWordLength(text)).toBe(5);
     });
 
     test('ignores numbers when calculating median word length', () => {
@@ -290,30 +288,29 @@ describe('getMedianWordLength', () => {
 
 describe('getMostCommonLetter', () => {
     test('returns undefined for invalid input', () => {
-        expect(getMostCommonLetter(undefined)).toBe(undefined)
-        expect(getMostCommonLetter(null)).toBe(undefined)
-        expect(getMostCommonLetter([])).toBe(undefined)
-        expect(getMostCommonLetter(123)).toBe(undefined)
+        expect(getMostCommonLetter(undefined)).toBe(undefined);
+        expect(getMostCommonLetter(null)).toBe(undefined);
+        expect(getMostCommonLetter([])).toBe(undefined);
+        expect(getMostCommonLetter(123)).toBe(undefined);
     });
 
     test('returns the single most frequently occurring letter in a string', () => {
-        expect(getMostCommonLetter('The quick brown fox jumps over the lazy dog.')).toBe('o')
+        expect(getMostCommonLetter('The quick brown fox jumps over the lazy dog.')).toEqual(['o']);
     });
 
-    // TODO: WHAT SHOULD HAPPEN WHEN THERE IS A TIE BREAK BETWEEN MOST FREQUENT LETTERS??
-    test('a b c d e f g h i j k l m n o p q r s t u v w x y z', () => {
-        expect(getMostCommonLetter('a b c d e f g h i j k l m n o p q r s t u v w x y z')).toBe('a')
+    test('returns all most common letters if there is a tiebreak', () => {
+        expect(getMostCommonLetter('a a b b c c d e f g h i j k l m n o p q r s t u v w x y z')).toEqual(['a', 'b', 'c']);
     });
 
     test('ignores case when calculating most common letter', () => {
-        expect(getMostCommonLetter('A a A a b b b c c d e')).toBe('a')
+        expect(getMostCommonLetter('A a A a b b b c c d e')).toEqual(['a']);
     });
 
     test('ignores special characters when calculating most common letter', () => {
-        expect(getMostCommonLetter('A a A a b b b c c d e !!!!!!!! @@@@@@')).toBe('a')
+        expect(getMostCommonLetter('A a A a b b b c c d e !!!!!!!! @@@@@@')).toEqual(['a']);
     });
 
     test('ignores numbers characters when calculating most common letter', () => {
-        expect(getMostCommonLetter('A a A a b b b c c d e 11111111 22222')).toBe('a')
+        expect(getMostCommonLetter('A a A a b b b c c d e 11111111 22222')).toEqual(['a']);
     });
 });

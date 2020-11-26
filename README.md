@@ -8,8 +8,6 @@
 # Todo
 - API
 - persistence/server-side processing
-- Multiple modes
-- Multiple most common letters
 - Mean from freq table
 - Use closures to capture state (e.g. valid input, word list, etc)
 - validate input function that can be used in composition

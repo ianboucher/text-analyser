@@ -10,8 +10,16 @@ export default function Stat(props) {
         <Card elevation={3}>
             <CardHeader title={statName} id={`${id}-title`} data-testid={`${id}-title`} />
             <CardContent id={`${id}-value`} data-testid={`${id}-value`}>
-                <Typography>{statValue ?? `--`}</Typography>
+                <Typography>{getDisplayValue(statValue)}</Typography>
             </CardContent>
         </Card>
     );
+}
+
+function getDisplayValue(statValue) {
+    if (Array.isArray(statValue) && statValue.length) {
+        return (statValue.length > 1) ? statValue.join(", ") : statValue[0];
+    }
+
+    return statValue ?? "--";
 }

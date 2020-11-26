@@ -2,14 +2,22 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import TextFileStats from '../../components/TextFileStats';
 
-jest.mock('../../statistics.js', () => {
+jest.mock('../../modules/statistics.js', () => {
     return {
         getWordCount: () => 'MOCK_WORD_COUNT',
-        getLineCount: () => 'MOCK_LINE_COUNT',
         getMeanWordLength: () => 'MOCK_MEAN_WORD_LENGTH',
         getModalWordLength: () => 'MOCK_MODAL_WORD_LENGTH',
         getMedianWordLength: () => 'MOCK_MEDIAN_WORD_LENGTH',
         getMostCommonLetter: () => 'MOCK_MOST_COMMON_LETTER',
+    }
+});
+
+jest.mock('../../modules/textProcessing.js', () => {
+    return {
+        getWordCount: () => 'MOCK_WORD_COUNT',
+        getLineCount: () => 'MOCK_LINE_COUNT',
+        getLetters: () => 'MOCK_LETTERS',
+        getWords: () => 'MOCK_LETTERS'
     }
 });
 

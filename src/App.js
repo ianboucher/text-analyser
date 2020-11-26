@@ -5,6 +5,7 @@ import { useState } from 'react';
 import TextFileStats from './components/TextFileStats';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
 function App() {
 
@@ -19,6 +20,11 @@ function App() {
                     </Toolbar>
                 </AppBar>
             </header>
+
+            <div id="title-container" data-testid="title-container" className="App-title">
+                <Typography id="main-title" variant="h2" gutterBottom>Riverford Text Analyser</Typography>
+                <Typography id="main-title" variant="h5">Add a .txt file to see some basic statistics!</Typography>
+            </div>
 
             <div id="main-container" className="App-main-content">
                 <div id="file-input-container" data-testid="file-input-container" className="App-dropzone">

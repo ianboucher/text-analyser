@@ -33,6 +33,13 @@ test('stat renders placeholder if value is undefined', () => {
     expect(title).toHaveTextContent('--');
 });
 
+test('stat renders placeholder if value is empty array', () => {
+    render(<Stat id='statType' statValue={[]} />);
+    const title = screen.getByTestId('statType-value');
+
+    expect(title).toHaveTextContent('--');
+});
+
 test('stat renders comma seperated list of values if value is an array', () => {
     render(<Stat id='statType' statValue={['a, b, c']} />);
     const title = screen.getByTestId('statType-value');

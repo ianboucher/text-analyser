@@ -12,8 +12,6 @@
 - Use closures to capture state (e.g. valid input, word list, etc)
 - validate input function that can be used in composition
 - round function with the ability to specify precision
-- add some text above dropzone to help the user
-- improve typography of stats?
 
 # Getting Started
 

@@ -1,12 +1,14 @@
 .App {
     text-align: center;
-    background-color: rgb(248, 246, 241);
-    height: 100vh;
   }
   
 .App-header {
   background-image: url('../img/header-bg-desktop.webp');
   background-size: cover;
+}
+
+.App-title {
+    margin-top: 5%;
 }
 
 .App-main-content {
@@ -17,8 +19,10 @@
     height: 15%;
     width: 60%;
     max-width: 600px;
-    margin: 30vh auto 0;
-    transform: translateY(-40%);
+    margin: 100px auto 75px;
+
+    /* margin: 15vh auto 0;
+    transform: translateY(-40%); */
 }
 
 .App-stats {

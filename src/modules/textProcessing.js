@@ -1,4 +1,4 @@
-import { pipe } from './helpers'
+import { pipe } from './helpers';
 
 const NEWLINE_PATTERN = /[\r\n|\r|\n]+./g;
 const WORD_PATTERN = /[A-Za-z]+/gm;
@@ -39,7 +39,7 @@ function adjustForFirstLine(string) {
 }
 
 function matchLetters(string) {
-    return string.match(LETTER_PATTERN) ?? []
+    return string.match(LETTER_PATTERN) ?? [];
 }
 
 function matchWholeWords(string) {

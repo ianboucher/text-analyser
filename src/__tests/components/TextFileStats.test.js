@@ -14,7 +14,6 @@ jest.mock('../../modules/statistics.js', () => {
 
 jest.mock('../../modules/textProcessing.js', () => {
     return {
-        getWordCount: () => 'MOCK_WORD_COUNT',
         getLineCount: () => 'MOCK_LINE_COUNT',
         getLetters: () => 'MOCK_LETTERS',
         getWords: () => 'MOCK_LETTERS'

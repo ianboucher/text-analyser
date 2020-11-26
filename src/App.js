@@ -1,11 +1,11 @@
-import logo from './img/site-logo.webp';
-import './styles/App.css';
-import { DropzoneArea } from 'material-ui-dropzone';
-import { useState } from 'react';
-import TextFileStats from './components/TextFileStats';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import { DropzoneArea } from 'material-ui-dropzone';
+import { useState } from 'react';
+import TextFileStats from './components/TextFileStats';
+import logo from './img/site-logo.webp';
+import './styles/App.css';
 
 function App() {
 
@@ -23,7 +23,7 @@ function App() {
 
             <div id="title-container" data-testid="title-container" className="App-title">
                 <Typography id="main-title" variant="h2" gutterBottom>Riverford Text Analyser</Typography>
-                <Typography id="main-title" variant="h5">Add a .txt file to see some basic statistics!</Typography>
+                <Typography id="subtitle" variant="h5">Add a .txt file to see some basic statistics!</Typography>
             </div>
 
             <div id="main-container" className="App-main-content">

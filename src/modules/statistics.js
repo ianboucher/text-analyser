@@ -5,10 +5,7 @@ export function getWordCount(words) {
 }
 
 export function getMeanWordLength(words) {
-
     const roundedMean = pipe(
-        // validateInput,
-        // getWords, // MIGHT BE PREFERABLE TO HAVE THIS FUNC EXPECT WORDS TO BE PASSED IN - TO ALLOW WORDS TO BE PROCESS ONCE
         getWordLengthFreqs,
         computeMeanFromFreqs,
         roundToOneDp
@@ -18,10 +15,7 @@ export function getMeanWordLength(words) {
 }
 
 export function getModalWordLength(words) {
-
     const wordLengthFreqs = pipe(
-        // validateInput,
-        // getWords, // MIGHT BE PREFERABLE TO HAVE THIS FUNC EXPECT WORDS TO BE PASSED IN - TO ALLOW WORDS TO BE PROCESS ONCE
         getWordLengthFreqs,
         takeKeysAtMaxFreq
     )(words);
@@ -30,10 +24,7 @@ export function getModalWordLength(words) {
 }
 
 export function getMedianWordLength(words) {
-
     const median = pipe(
-        // validateInput,
-        // getWords,
         getWordLengthFreqs,
         getWordLengths,
         computeMedian
@@ -43,10 +34,7 @@ export function getMedianWordLength(words) {
 }
 
 export function getMostCommonLetter(letters) {
-
     return pipe(
-        // validateInput,
-        // getLetters,
         getLetterFreqs,
         takeKeysAtMaxFreq
     )(letters);

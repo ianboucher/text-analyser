@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
-import Stat from './Stat';
 import {
-    getLineCount,
     getMeanWordLength,
     getMedianWordLength,
     getModalWordLength,
     getMostCommonLetter,
     getWordCount
-} from '../statistics';
-import '../styles/TextFileStats.css'
+} from '../modules/statistics';
+import {
+    getLetters,
+    getLineCount,
+    getWords
+} from '../modules/textProcessing';
+import '../styles/TextFileStats.css';
+import Stat from './Stat';
 
 export default function TextFileStats(props) {
 
@@ -16,13 +20,16 @@ export default function TextFileStats(props) {
     const [text, setText] = useState('');
     useEffect(() => readFile(files, setText));
 
+    const letters = getLetters(text);
+    const words = getWords(text);
+
     return (
-        <div id={id} data-testid={id} className="TestFileStats-grid">
+        <div files={files} id={id} data-testid={id} className="TestFileStats-grid">
 
             <div id="word-count" data-testid="word-count" className="TestFileStats-grid-item">
                 <Stat
                     statName={"Total Word Count"}
-                    statValue={getWordCount(text)}
+                    statValue={getWordCount(words)}
                 />
             </div>
 
@@ -36,35 +43,35 @@ export default function TextFileStats(props) {
             <div id="mean-word-length" data-testid="mean-word-length" className="TestFileStats-grid-item">
                 <Stat
                     statName={"Mean Word Length"}
-                    statValue={getMeanWordLength(text)}
+                    statValue={getMeanWordLength(words)}
                 />
             </div>
 
             <div id="modal-word-length" data-testid="modal-word-length" className="TestFileStats-grid-item">
                 <Stat
                     statName={"Modal Word Length"}
-                    statValue={getModalWordLength(text)}
+                    statValue={getModalWordLength(words)}
                 />
             </div>
 
             <div id="median-word-length" data-testid="median-word-length" className="TestFileStats-grid-item">
                 <Stat
                     statName={"Median Word Length"}
-                    statValue={getMedianWordLength(text)}
+                    statValue={getMedianWordLength(words)}
                 />
             </div>
 
             <div id="most-common-letter" data-testid="most-common-letter" className="TestFileStats-grid-item">
                 <Stat
                     statName={"Most Common Letter"}
-                    statValue={getMostCommonLetter(text)}
+                    statValue={getMostCommonLetter(letters)}
                 />
             </div>
         </div >
     );
 }
 
-function readFile(files, setText) { // THERE MUST BE A BETTER WAY OF DOING THIS - CURRYING??
+function readFile(files, setText, setWords, setLetters) { // THERE MUST BE A BETTER WAY OF DOING THIS - CURRYING??
     const reader = new FileReader();
 
     if (files && files.length > 0) {

@@ -1,10 +1,11 @@
-import logo from './img/site-logo.webp';
-import './styles/App.css';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import { DropzoneArea } from 'material-ui-dropzone';
 import { useState } from 'react';
 import TextFileStats from './components/TextFileStats';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
+import logo from './img/site-logo.webp';
+import './styles/App.css';
 
 function App() {
 
@@ -20,20 +21,28 @@ function App() {
                 </AppBar>
             </header>
 
+            <div id="title-container" data-testid="title-container" className="App-title">
+                <Typography id="main-title" variant="h2" gutterBottom>Riverford Text Analyser</Typography>
+                <Typography id="subtitle" variant="h5">Add a .txt file to see some basic statistics!</Typography>
+            </div>
+
             <div id="main-container" className="App-main-content">
                 <div id="file-input-container" data-testid="file-input-container" className="App-dropzone">
                     <DropzoneArea
                         onChange={(files) => setFiles(files)}
                         filesLimit={1}
+                        maxFileSize={7000000}
                         acceptedFiles={["text/plain"]}
                         inputProps={{ 'data-testid': "file-input" }}
                     />
                 </div>
 
-                <TextFileStats
-                    id="text-stats"
-                    files={files}
-                />
+                <div id="file-stats-container" data-testid="file-stats-container" className="App-stats">
+                    <TextFileStats
+                        id="text-stats"
+                        files={files}
+                    />
+                </div>
             </div>
         </div>
     );

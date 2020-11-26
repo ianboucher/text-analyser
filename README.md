@@ -9,8 +9,6 @@ This project is the output of a technical challenge with the requirement to buil
 - Most common letter
 ---
 
-<br/>
-
 ### Scope (AKA Excuses!)
 Given the above requirements and the available time, I decided to build this app in a manner simlar to some of the simple online text/JSON formatting tools available, where no persistence is expected and no authentication is required. The user simply reads a file from their filesystem and is able to view the statistics detailed above.
 
@@ -26,11 +24,13 @@ In processing the files to extract the required statistics, I made the following
 - Words are considered to be contiguous blocks of letters - i.e. numbers and special chars are ignored
 - Numbers or special characters adjacent to letters are ommitted from word length calculations - so "3rd" is considered a 2 letter word
 - Case is ignored when calculating most common letter - i.e A = a
+- More than one modal word length or most common letter are possible - in the case of a tiebreak, each value is displayed
 
 <br/>
 
 ---
 <br/>
+
 ## Getting Up & Running
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), so it should behave like any other React app. Clone the repo, and from the project directory run:

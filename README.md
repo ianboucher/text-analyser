@@ -8,10 +8,6 @@
 # Todo
 - API
 - persistence/server-side processing
-- Mean from freq table
-- Use closures to capture state (e.g. valid input, word list, etc)
-- validate input function that can be used in composition
-- round function with the ability to specify precision
 
 # Getting Started
 

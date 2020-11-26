@@ -151,6 +151,26 @@ describe('getMeanWordLength', () => {
 
         expect(getMeanWordLength(text)).toBe(4.7)
     });
+
+    test('ignores numbers when calculating modal word length', () => {
+        const words3 = Array(5).fill().map(() => faker.lorem.word(3)).join(' ');
+        const words4 = Array(5).fill().map(() => faker.lorem.word(4)).join(' ');
+        const words7 = Array(5).fill().map(() => faker.lorem.word(7)).join(' ');
+        const numbers = Array(10).fill('111111111111  22222222 333333333333333').join(' ');
+        const text = [words3, words4, words7, numbers].join(' ');
+
+        expect(getMeanWordLength(text)).toBe(4.7);
+    });
+
+    test('ignores special characters when calculating modal word length', () => {
+        const words3 = Array(5).fill().map(() => faker.lorem.word(3)).join(' ');
+        const words4 = Array(5).fill().map(() => faker.lorem.word(4)).join(' ');
+        const words7 = Array(5).fill().map(() => faker.lorem.word(7)).join(' ');
+        const specialChars = Array(10).fill('@@@@@@@@@@  !!!!!!!!!!!! &&&&&&&&&&&&').join(' ');
+        const text = [words3, words4, words7, specialChars].join(' ');
+
+        expect(getMeanWordLength(text)).toBe(4.7);
+    });
 });
 
 describe('getModalWordLength', () => {
@@ -190,7 +210,25 @@ describe('getModalWordLength', () => {
         expect(getModalWordLength(text)).toBe(4);
     });
 
-    test.todo('can result be skewed by special chars or numbers?')
+    test('ignores numbers when calculating modal word length', () => {
+        const words3 = Array(5).fill().map(() => faker.lorem.word(3)).join(' ');
+        const words4 = Array(5).fill().map(() => faker.lorem.word(4)).join(' ');
+        const words5 = Array(7).fill().map(() => faker.lorem.word(5)).join(' ');
+        const numbers = Array(10).fill('111111111111  22222222 333333333333333').join(' ');
+        const text = [words3, words4, words5, numbers].join(' ');
+
+        expect(getModalWordLength(text)).toBe(5);
+    });
+
+    test('ignores special characters when calculating modal word length', () => {
+        const words3 = Array(5).fill().map(() => faker.lorem.word(3)).join(' ');
+        const words4 = Array(5).fill().map(() => faker.lorem.word(4)).join(' ');
+        const words5 = Array(7).fill().map(() => faker.lorem.word(5)).join(' ');
+        const specialChars = Array(10).fill('@@@@@@@@@@  !!!!!!!!!!!! &&&&&&&&&&&&').join(' ');
+        const text = [words3, words4, words5, specialChars].join(' ');
+
+        expect(getModalWordLength(text)).toBe(5);
+    });
 });
 
 describe('getMedianWordLength', () => {
@@ -229,7 +267,25 @@ describe('getMedianWordLength', () => {
         expect(getMedianWordLength(text)).toBe(5)
     });
 
-    test.todo('can result be skewed by special chars or numbers?')
+    test('ignores numbers when calculating median word length', () => {
+        const words3 = Array(2).fill().map(() => faker.lorem.word(3)).join(' ');
+        const words4 = Array(5).fill().map(() => faker.lorem.word(4)).join(' ');
+        const words5 = Array(3).fill().map(() => faker.lorem.word(5)).join(' ');
+        const numbers = Array(10).fill('111111111111  22222222 333333333333333').join(' ');
+        const text = [words3, words4, words5, numbers].join(' ');
+
+        expect(getMedianWordLength(text)).toBe(4);
+    });
+
+    test('ignores special characters when calculating median word length', () => {
+        const words3 = Array(2).fill().map(() => faker.lorem.word(3)).join(' ');
+        const words4 = Array(5).fill().map(() => faker.lorem.word(4)).join(' ');
+        const words5 = Array(3).fill().map(() => faker.lorem.word(5)).join(' ');
+        const specialChars = Array(10).fill('@@@@@@@@@@  !!!!!!!!!!!! &&&&&&&&&&&&').join(' ');
+        const text = [words3, words4, words5, specialChars].join(' ');
+
+        expect(getMedianWordLength(text)).toBe(4);
+    });
 });
 
 describe('getMostCommonLetter', () => {

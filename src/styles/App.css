@@ -3,28 +3,25 @@
     background-color: rgb(248, 246, 241);
     height: 100vh;
   }
-
-.App-logo {
-
-}
-
+  
 .App-header {
   background-image: url('../img/header-bg-desktop.webp');
   background-size: cover;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
 .App-main-content {
     background-image: url('../img/veg.webp');
-    /* background-size: contain; */
 }
 
 .App-dropzone {
     height: 15%;
     width: 60%;
+    max-width: 600px;
     margin: 30vh auto 0;
     transform: translateY(-40%);
+}
+
+.App-stats {
+    margin: 0 auto;
+    max-width: 1200px;
 }

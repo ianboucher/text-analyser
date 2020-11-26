@@ -31,10 +31,12 @@ function App() {
                     />
                 </div>
 
-                <TextFileStats
-                    id="text-stats"
-                    files={files}
-                />
+                <div id="file-stats-container" data-testid="file-stats-container" className="App-stats">
+                    <TextFileStats
+                        id="text-stats"
+                        files={files}
+                    />
+                </div>
             </div>
         </div>
     );

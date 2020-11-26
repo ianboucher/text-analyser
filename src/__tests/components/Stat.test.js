@@ -25,3 +25,10 @@ test('stat renders supplied value', () => {
 
     expect(title).toHaveTextContent('Stat Value')
 });
+
+test('stat renders placeholder if value is undefined', () => {
+    render(<Stat id="testType" statValue={undefined} />);
+    const title = screen.getByTestId("testType-value");
+
+    expect(title).toHaveTextContent('--')
+});

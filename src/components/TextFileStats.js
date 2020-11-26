@@ -18,7 +18,7 @@ export default function TextFileStats(props) {
 
     const { files, id } = props;
     const [text, setText] = useState('');
-    useEffect(() => readFile(files, setText));
+    useEffect(() => readFile(files, setText), [files]);
 
     const letters = getLetters(text);
     const words = getWords(text);
@@ -71,7 +71,7 @@ export default function TextFileStats(props) {
     );
 }
 
-function readFile(files, setText, setWords, setLetters) { // THERE MUST BE A BETTER WAY OF DOING THIS - CURRYING??
+function readFile(files, setText) {
     const reader = new FileReader();
 
     if (files && files.length > 0) {

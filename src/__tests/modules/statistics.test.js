@@ -11,10 +11,11 @@ const faker = require('faker');
 describe('getWordCount', () => {
 
     test('returns 0 for invalid input', () => {
-        expect(getWordCount(undefined)).toBe(0)
-        expect(getWordCount(null)).toBe(0)
-        expect(getWordCount('')).toBe(0)
-        expect(getWordCount(123)).toBe(0)
+        expect(getWordCount(undefined)).toBe(0);
+        expect(getWordCount(null)).toBe(0);
+        expect(getWordCount('')).toBe(0);
+        expect(getWordCount(123)).toBe(0);
+        expect(getWordCount({})).toBe(0);
     });
 
     test('gets correct word count for empty word array', () => {

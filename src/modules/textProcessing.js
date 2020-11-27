@@ -6,21 +6,21 @@ const LETTER_PATTERN = /[A-Za-z]/gm
 
 export function getLetters(string) {
     return pipe(
-        validateInput,
+        sanitizeInput,
         matchLetters,
     )(string);
 }
 
 export function getWords(string) {
     return pipe(
-        validateInput,
+        sanitizeInput,
         matchWholeWords,
     )(string);
 }
 
 export function getLineCount(string) {
     return pipe(
-        validateInput,
+        sanitizeInput,
         adjustForFirstLine,
         countNewlineChars
     )(string);
@@ -43,10 +43,10 @@ function matchLetters(string) {
 }
 
 function matchWholeWords(string) {
-    return string?.match(WORD_PATTERN) ?? [];
+    return string.match(WORD_PATTERN) ?? [];
 }
 
-function validateInput(string) {
+function sanitizeInput(string) {
     if (typeof string === "string" && string.length !== 0) {
         return string;
     }

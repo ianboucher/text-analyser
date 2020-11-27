@@ -31,7 +31,7 @@ function App() {
                     <DropzoneArea
                         onChange={(files) => setFiles(files)}
                         filesLimit={1}
-                        maxFileSize={1050000}
+                        maxFileSize={10500000}
                         acceptedFiles={["text/plain"]}
                         inputProps={{ 'data-testid': "file-input" }}
                     />

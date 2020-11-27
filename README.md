@@ -18,7 +18,7 @@ Whilst not a "full-featured" app, hopefully I have met the brief and avoided fal
 
 ### Assumptions
 In processing the files to extract the required statistics, I made the following assumptions:
-- Max file size is set to < 10Mb - if this needs increasing, please let me know and I will add a fix
+- **Max file size is set to 10Mb** - if this needs increasing, please let me know and I will add a fix
 - Only plain .txt files are considered - .rtf, .doc formats etc are not accepted
 - No persistence of either the files or the associated statistics
 - Words are considered to be contiguous blocks of letters - i.e. numbers and special chars are ignored

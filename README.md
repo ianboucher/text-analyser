@@ -14,7 +14,7 @@ Given the above requirements and the available time, I decided to build this app
 
 There is no authentication, and all processing of the text files is done client-side, hence there is no API or communication with a server, thus side-stepping many of the associated security concerns. Were this to be implemented on a company web-property and there were an explicit expectation of persistence, I would have added authentication and an API layer (given time). Had there been a requirement for very large files or more complex processing, I would probably consider uploading to S3 and triggering a Lambda function to process the file asychronously.
 
-Whilst not a "full-featured" app, hopefully I have met the brief and avoided falling into the trap of building things that were not asked for. I have attempted to adhere to a functional-style of JavaScript, to the best of my ability, and I hope the project is sufficiently readable and well-structured.  
+Whilst not a "full-featured" app, hopefully I have met the brief and avoided falling into the trap of building things that were not asked for. I have attempted to apply a functional-style of JavaScript, to the best of my ability, and I hope the project is sufficiently readable and well-structured.  
 
 ### Assumptions
 In processing the files to extract the required statistics, I made the following assumptions:
@@ -55,5 +55,3 @@ To build the app for production and bundle it to the `build` folder, run:
 <br />
 
 Which correctly bundles React in production mode and optimizes the build for the best performance.The build is minified and the filenames include the hashes. The app is ready to be deployed!
-
-

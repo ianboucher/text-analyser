@@ -5,7 +5,7 @@ This project is the output of a technical challenge with the requirement to buil
 ### Required Statistics
 - Whitespace delimited word count
 - Line count
-- Mean(to 1decimal place), mode and median letters per word
+- Mean (to 1decimal place), mode and median letters per word
 - Most common letter
 ---
 
@@ -34,6 +34,11 @@ In processing the files to extract the required statistics, I made the following
 ## Getting Up & Running
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), so it should behave like any other React app. To get started, clone the repo, and from the project directory run:
+
+#### `yarn install`
+<br/>
+
+And then:
 #### `yarn start`
 <br />
 

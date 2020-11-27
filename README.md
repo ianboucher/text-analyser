@@ -33,7 +33,7 @@ In processing the files to extract the required statistics, I made the following
 
 ## Getting Up & Running
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), so it should behave like any other React app. Clone the repo, and from the project directory run:
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), so it should behave like any other React app. To get started, clone the repo, and from the project directory run:
 #### `yarn start`
 <br />
 

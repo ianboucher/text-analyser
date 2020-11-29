@@ -1,7 +1,7 @@
 import { pipe } from './helpers';
 
 const NEWLINE_PATTERN = /[\r\n|\r|\n]+./g;
-const WORD_PATTERN = /[A-Za-z]+/gm;
+const WORD_PATTERN = /[A-Za-z]+(['|-][A-Za-z]+)?/gm;
 const LETTER_PATTERN = /[A-Za-z]/gm
 
 export function getLetters(string) {

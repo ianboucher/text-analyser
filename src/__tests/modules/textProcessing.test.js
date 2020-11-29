@@ -36,13 +36,23 @@ describe('getWords', () => {
     });
 
     test('ignores numbers when calculating modal word length', () => {
-        const words = 'First second 3rd 11111 22222 3333333\n\r';
-        expect(getWords(words)).toEqual(['First', 'second', 'rd']);
+        const text = 'First second 3rd 11111 22222 3333333\n\r';
+        expect(getWords(text)).toEqual(['First', 'second', 'rd']);
     });
 
     test('ignores special characters when calculating modal word length', () => {
-        const words = 'First second 3rd @@@@@  !!!!!! &&&&&&&\n\r';
-        expect(getWords(words)).toEqual(['First', 'second', 'rd']);
+        const text = 'First second 3rd @@@@@  !!!!!! &&&&&&&\n\r';
+        expect(getWords(text)).toEqual(['First', 'second', 'rd']);
+    });
+
+    test('english contractions are counted correctly as single words', () => {
+        const text = `I'm isn't can't won't don't shouldn't wouldn't`;
+        expect(getWords(text)).toEqual([`I'm`, `isn't`, `can't`, `won't`, `don't`,  `shouldn't`, `wouldn't`]);
+    });
+
+    test('hypentated words are counted as single words', () => {
+        const text = `Hyphenated-words should be counted as single-words, but this will affect char-count`;
+        expect(getWords(text)).toEqual([`Hyphenated-words`, `should`, `be`, `counted`, `as`, `single-words`, `but`, `this`, `will`, `affect`, `char-count`]);
     });
 });
 

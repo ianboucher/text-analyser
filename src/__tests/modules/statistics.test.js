@@ -4,6 +4,7 @@ import {
     getModalWordLength,
     getMedianWordLength,
     getMostCommonLetter,
+    getMostCommonWord,
 } from '../../modules/statistics'
 
 const faker = require('faker');
@@ -143,5 +144,23 @@ describe('getMostCommonLetter', () => {
     test('ignores case when calculating most common letter', () => {
         const letters = 'A a A a b b b c c d e'.match(/[A-Za-z]/gm);
         expect(getMostCommonLetter(letters)).toEqual(['a']);
+    });
+});
+
+describe('getMostCommonWord', () => {
+
+    test('returns the single most frequently occurring word in a text', () => {
+        const words = ['the', 'a', 'I', 'the', 'lots', 'of', 'other', 'words'];
+        expect(getMostCommonWord(words)).toEqual(['the']);
+    });
+
+    test('returns all most common words if there is a tiebreak', () => {
+        const words = ['the', 'a', 'I', 'I', 'of', 'the', 'lots', 'of', 'other', 'words'];
+        expect(getMostCommonWord(words)).toEqual(['the', 'i', 'of']);
+    });
+
+    test('ignores case when counting most common words', () => {
+        const words = ['the', 'a', 'The', 'I', 'I', 'of', 'the', 'lots', 'of', 'other', 'words'];
+        expect(getMostCommonWord(words)).toEqual(['the']);
     });
 });

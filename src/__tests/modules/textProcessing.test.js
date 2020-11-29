@@ -51,8 +51,8 @@ describe('getWords', () => {
     });
 
     test('hypentated words are counted as single words', () => {
-        const text = `Hyphenated-words should be counted as single-words, but this will affect char-count`;
-        expect(getWords(text)).toEqual([`Hyphenated-words`, `should`, `be`, `counted`, `as`, `single-words`, `but`, `this`, `will`, `affect`, `char-count`]);
+        const text = `Hyphenated-words counted as single-words, but this will affect char-count`;
+        expect(getWords(text)).toEqual([`Hyphenated-words`, `counted`, `as`, `single-words`, `but`, `this`, `will`, `affect`, `char-count`]);
     });
 });
 

@@ -35,9 +35,16 @@ export function getMedianWordLength(words) {
 
 export function getMostCommonLetter(letters) {
     return pipe(
-        getLetterFreqs,
+        getStringFreqs,
         takeKeysAtMaxFreq
     )(letters);
+}
+
+export function getMostCommonWord(words) {
+    return pipe(
+        getStringFreqs,
+        takeKeysAtMaxFreq
+    )(words);
 }
 
 function getWordLengths(wordLengthFreqs) {
@@ -67,8 +74,8 @@ function computeMedian(values) {
     return parseInt(values[Math.floor(values.length / 2)]);
 }
 
-function getLetterFreqs(letters) {
-    return letters.reduce((letterFreqs, lttr) => {
+function getStringFreqs(strings) {
+    return strings.reduce((letterFreqs, lttr) => {
         const letter = lttr.toLowerCase();
         (letter in letterFreqs) ? letterFreqs[letter]++ : letterFreqs[letter] = 1;
         return letterFreqs;

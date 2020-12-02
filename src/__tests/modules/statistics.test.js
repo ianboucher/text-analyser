@@ -142,7 +142,7 @@ describe('getMostCommonLetter', () => {
     });
 });
 
-describe('getMostCommonWord', () => {
+describe('getMostCommonWords', () => {
 
     test('returns an sorted array the most frequently occurring words in a text', () => {
         const words = ['the', 'a', 'I', 'the', 'lots', 'of', 'other', 'words'];
@@ -153,4 +153,6 @@ describe('getMostCommonWord', () => {
         const words = ['the', 'a', 'The', 'I', 'I', 'of', 'the', 'lots', 'of', 'other', 'words'];
         expect(getMostCommonWords(words)).toEqual([ 'the', 'i', 'of', 'a', 'lots', 'other', 'words' ]);
     });
+
+    test.todo('there must be other tests...')
 });

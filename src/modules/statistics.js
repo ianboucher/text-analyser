@@ -67,7 +67,6 @@ function getKeysSortedByValue(obj) {
     }, []);
 }
 
-// TODO: SHOULD THIS BE EXPORTED??
 function getWordLengths(wordLengthFreqs) {
     // object keys is not necessarily sorted - thought it was...
     return Object.keys(wordLengthFreqs);

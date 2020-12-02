@@ -4,6 +4,7 @@ import {
     getMedianWordLength,
     getModalWordLength,
     getMostCommonLetter,
+    getMostCommonWords,
     getWordCount,
     getWordLengthFreqs
 } from '../modules/statistics';
@@ -67,6 +68,13 @@ export default function TextFileStats(props) {
                 <Stat
                     statName={"Most Common Letter"}
                     statValue={getMostCommonLetter(letters)}
+                />
+            </div>
+
+            <div id="most-common-words" data-testid="most-common-words" className="TestFileStats-grid-item">
+                <Stat
+                    statName={"Most Common Letter"}
+                    statValue={getMostCommonWords(words)}
                 />
             </div>
         </div >

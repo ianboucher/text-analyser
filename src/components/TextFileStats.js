@@ -4,7 +4,8 @@ import {
     getMedianWordLength,
     getModalWordLength,
     getMostCommonLetter,
-    getWordCount
+    getWordCount,
+    getWordLengthFreqs
 } from '../modules/statistics';
 import {
     getLetters,
@@ -22,6 +23,7 @@ export default function TextFileStats(props) {
 
     const letters = getLetters(text);
     const words = getWords(text);
+    const wordLengthFreqs = getWordLengthFreqs(words);
 
     return (
         <div files={files} id={id} data-testid={id} className="TestFileStats-grid">
@@ -43,21 +45,21 @@ export default function TextFileStats(props) {
             <div id="mean-word-length" data-testid="mean-word-length" className="TestFileStats-grid-item">
                 <Stat
                     statName={"Mean Word Length"}
-                    statValue={getMeanWordLength(words)}
+                    statValue={getMeanWordLength(wordLengthFreqs)}
                 />
             </div>
 
             <div id="modal-word-length" data-testid="modal-word-length" className="TestFileStats-grid-item">
                 <Stat
                     statName={"Modal Word Length"}
-                    statValue={getModalWordLength(words)}
+                    statValue={getModalWordLength(wordLengthFreqs)}
                 />
             </div>
 
             <div id="median-word-length" data-testid="median-word-length" className="TestFileStats-grid-item">
                 <Stat
                     statName={"Median Word Length"}
-                    statValue={getMedianWordLength(words)}
+                    statValue={getMedianWordLength(wordLengthFreqs)}
                 />
             </div>
 

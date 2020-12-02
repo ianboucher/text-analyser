@@ -5,6 +5,7 @@ import TextFileStats from '../../components/TextFileStats';
 jest.mock('../../modules/statistics.js', () => {
     return {
         getWordCount: () => 'MOCK_WORD_COUNT',
+        getWordLengthFreqs: () => 'MOCK_WORD_LENGTH_FREQS',
         getMeanWordLength: () => 'MOCK_MEAN_WORD_LENGTH',
         getModalWordLength: () => 'MOCK_MODAL_WORD_LENGTH',
         getMedianWordLength: () => 'MOCK_MEDIAN_WORD_LENGTH',

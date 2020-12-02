@@ -5,6 +5,7 @@ import {
     getMedianWordLength,
     getMostCommonLetter,
     getMostCommonWord,
+    getWordLengthFreqs
 } from '../../modules/statistics'
 
 const faker = require('faker');
@@ -29,105 +30,195 @@ describe('getWordCount', () => {
     });
 });
 
-describe('getMeanWordLength', () => {
-
-    test('return 0 mean word length for empty word array', () => {
-        expect(getMeanWordLength([])).toBe(0)
+describe('getWordLengthFreqs', () => {
+    test('returns empty freqency table when supplied with invalid input', () => {
+        expect(getWordLengthFreqs(undefined)).toEqual({});
+        expect(getWordLengthFreqs(null)).toEqual({});
+        expect(getWordLengthFreqs('')).toEqual({});
+        expect(getWordLengthFreqs(123)).toEqual({});
+        expect(getWordLengthFreqs({})).toEqual({});
     });
 
-    test('gets correct mean word length for text containing words of uniform length', () => {
-        const words = faker.lorem.word(10).split(' ');
-        expect(getMeanWordLength(words)).toBe(10)
+    test('returns empty freqency table when supplied with emtpy array of words', () => {
+        expect(getWordLengthFreqs([])).toEqual({});
     });
 
-    test('gets correct mean for text containing words of varying length', () => {
-        const words3 = Array(5).fill().map(() => faker.lorem.word(3));
+    test('returns table with single entry - word length as key, freq as value', () => {
+        const words = Array(5).fill().map(() => faker.lorem.word(3));
+
+        expect(getWordLengthFreqs(words)).toEqual({ 3: 5 });
+    });
+
+    test('returns table with multiple entries - word length as key, freq as value', () => {
+        const words3 = Array(6).fill().map(() => faker.lorem.word(3));
         const words4 = Array(5).fill().map(() => faker.lorem.word(4));
-        const words5 = Array(5).fill().map(() => faker.lorem.word(5));
+        const words5 = Array(4).fill().map(() => faker.lorem.word(5));
         const words = [...words3, ...words4, ...words5];
 
-        expect(getMeanWordLength(words)).toBe(4)
-    });
-
-    test('correctly rounds down mean to 1 decimal place', () => {
-        const words3 = Array(5).fill().map(() => faker.lorem.word(3));
-        const words4 = Array(5).fill().map(() => faker.lorem.word(4));
-        const words6 = Array(5).fill().map(() => faker.lorem.word(6));
-        const words = [...words3, ...words4, ...words6];
-
-        expect(getMeanWordLength(words)).toBe(4.3)
-    });
-
-    test('correctly rounds up mean to 1 decimal place', () => {
-        const words3 = Array(5).fill().map(() => faker.lorem.word(3));
-        const words4 = Array(5).fill().map(() => faker.lorem.word(4));
-        const words7 = Array(5).fill().map(() => faker.lorem.word(7));
-        const words = [...words3, ...words4, ...words7];
-
-        expect(getMeanWordLength(words)).toBe(4.7)
+        expect(getWordLengthFreqs(words)).toEqual({ 3: 6, 4: 5, 5: 4 });
     });
 });
 
+// describe('getMeanWordLength', () => {
+
+//     test('return 0 mean word length for empty word array', () => {
+//         expect(getMeanWordLength([])).toBe(0)
+//     });
+
+//     test('gets correct mean word length for text containing words of uniform length', () => {
+//         const words = faker.lorem.word(10).split(' ');
+//         expect(getMeanWordLength(words)).toBe(10)
+//     });
+
+//     test('gets correct mean for text containing words of varying length', () => {
+//         const words3 = Array(5).fill().map(() => faker.lorem.word(3));
+//         const words4 = Array(5).fill().map(() => faker.lorem.word(4));
+//         const words5 = Array(5).fill().map(() => faker.lorem.word(5));
+//         const words = [...words3, ...words4, ...words5];
+
+//         expect(getMeanWordLength(words)).toBe(4)
+//     });
+
+//     test('correctly rounds down mean to 1 decimal place', () => {
+//         const words3 = Array(5).fill().map(() => faker.lorem.word(3));
+//         const words4 = Array(5).fill().map(() => faker.lorem.word(4));
+//         const words6 = Array(5).fill().map(() => faker.lorem.word(6));
+//         const words = [...words3, ...words4, ...words6];
+
+//         expect(getMeanWordLength(words)).toBe(4.3)
+//     });
+
+//     test('correctly rounds up mean to 1 decimal place', () => {
+//         const words3 = Array(5).fill().map(() => faker.lorem.word(3));
+//         const words4 = Array(5).fill().map(() => faker.lorem.word(4));
+//         const words7 = Array(5).fill().map(() => faker.lorem.word(7));
+//         const words = [...words3, ...words4, ...words7];
+
+//         expect(getMeanWordLength(words)).toBe(4.7)
+//     });
+// });
+
+describe('getMeanWordLength', () => {
+
+    test('returns 0 mean word length for empty freq table', () => {
+        expect(getMeanWordLength({})).toEqual(0);
+    });
+
+    test('gets correct mean word length freq table containing single entry', () => {
+        expect(getMeanWordLength({ 5: 10 })).toEqual(5);
+    });
+
+    test('gets correct mean word length freq table containing multiple entries', () => {
+        expect(getMeanWordLength({ 4: 6, 5: 10, 6: 7 })).toEqual(5);
+    });
+
+    test('correctly rounds up mean to 1 decimal place where applicable', () => {
+        expect(getMeanWordLength({ 4: 10, 5: 10, 6: 10, 7: 5 })).toEqual(5.3);
+    });
+});
+
+// describe('getModalWordLength', () => {
+
+//     test('returns 0 modal word length for empty word array', () => {
+//         expect(getModalWordLength([])).toEqual([0]);
+//     });
+
+//     test('gets correct modal word length for text containing words of uniform length', () => {
+//         const text = Array(10).fill().map(() => faker.lorem.word(10));
+//         expect(getModalWordLength(text)).toEqual([10]);
+//     });
+
+//     test('gets correct modal word length for text containing words of varying length', () => {
+//         const words3 = Array(5).fill().map(() => faker.lorem.word(3));
+//         const words4 = Array(5).fill().map(() => faker.lorem.word(4));
+//         const words5 = Array(7).fill().map(() => faker.lorem.word(5));
+//         const text = [...words3, ...words4, ...words5];
+
+//         expect(getModalWordLength(text)).toEqual([5]);
+//     });
+
+//     test('returns all modal values if max freqs are equal for more than 1 key', () => {
+//         const words3 = Array(5).fill().map(() => faker.lorem.word(3));
+//         const words4 = Array(7).fill().map(() => faker.lorem.word(4));
+//         const words5 = Array(7).fill().map(() => faker.lorem.word(5));
+//         const text = [...words3, ...words4, ...words5];
+
+//         expect(getModalWordLength(text)).toEqual([4, 5]);
+//     });
+// });
+
 describe('getModalWordLength', () => {
 
-    test('returns 0 modal word length for empty word array', () => {
-        expect(getModalWordLength([])).toEqual([0]);
+    test('returns 0 modal word length for empty freq table', () => {
+        expect(getModalWordLength({})).toEqual([0]);
     });
 
-    test('gets correct modal word length for text containing words of uniform length', () => {
-        const text = Array(10).fill().map(() => faker.lorem.word(10));
-        expect(getModalWordLength(text)).toEqual([10]);
+    test('gets correct modal word length freq table containing single entry', () => {
+        expect(getModalWordLength({ 5: 10 })).toEqual([5]);
     });
 
-    test('gets correct modal word length for text containing words of varying length', () => {
-        const words3 = Array(5).fill().map(() => faker.lorem.word(3));
-        const words4 = Array(5).fill().map(() => faker.lorem.word(4));
-        const words5 = Array(7).fill().map(() => faker.lorem.word(5));
-        const text = [...words3, ...words4, ...words5];
-
-        expect(getModalWordLength(text)).toEqual([5]);
+    test('gets correct modal word length freq table containing multiple entries', () => {
+        expect(getModalWordLength({ 4: 6, 5: 10, 6: 7 })).toEqual([5]);
     });
 
-    test('returns all modal values if max freqs are equal for more than 1 key', () => {
-        const words3 = Array(5).fill().map(() => faker.lorem.word(3));
-        const words4 = Array(7).fill().map(() => faker.lorem.word(4));
-        const words5 = Array(7).fill().map(() => faker.lorem.word(5));
-        const text = [...words3, ...words4, ...words5];
-
-        expect(getModalWordLength(text)).toEqual([4, 5]);
+    test('gets several values for modal word length when there is a tie break', () => {
+        expect(getModalWordLength({ 4: 10, 5: 10, 6: 10, 7: 5 })).toEqual([4, 5, 6]);
     });
 });
 
 describe('getMedianWordLength', () => {
 
-    test('returns 0 median word length for empty word array', () => {
-        expect(getMedianWordLength([])).toBe(0);
+    test('returns 0 modal word length for empty freq table', () => {
+        expect(getMedianWordLength({})).toEqual(0);
     });
 
-    test('gets correct median word length for text containing words of uniform length', () => {
-        const text = Array(10).fill().map(() => faker.lorem.word(10));
-        expect(getMedianWordLength(text)).toBe(10);
+    test('gets correct modal word length freq table containing single entry', () => {
+        expect(getMedianWordLength({ 5: 10 })).toEqual(5);
     });
 
-    test('gets correct median word length for text containing words of varying length', () => {
-        const words3 = Array(2).fill().map(() => faker.lorem.word(3));
-        const words4 = Array(5).fill().map(() => faker.lorem.word(4));
-        const words5 = Array(7).fill().map(() => faker.lorem.word(5));
-        const text = [...words3, ...words4, ...words5];
-
-        expect(getMedianWordLength(text)).toBe(4);
+    test('gets correct modal word length freq table containing multiple entries', () => {
+        expect(getMedianWordLength({ 4: 'anything', 5: 'anything', 6: 'anything' })).toEqual(5);
     });
 
-    test('gets correct median word length for even number of word lengths', () => {
-        const words3 = Array(2).fill().map(() => faker.lorem.word(3));
-        const words4 = Array(5).fill().map(() => faker.lorem.word(4));
-        const words5 = Array(3).fill().map(() => faker.lorem.word(5));
-        const words6 = Array(4).fill().map(() => faker.lorem.word(6));
-        const text = [...words3, ...words4, ...words5, ...words6];
+    test('gets calculates correct median from even-numbered range of values', () => {
+        expect(getMedianWordLength({ 4: 'anything', 5: 'anything', 6: 'anything', 7: 'anything' })).toEqual(6);
+    });
 
-        expect(getMedianWordLength(text)).toBe(5);
+    test('gets calculates correct median from even-numbered range of values with unequal spacing', () => {
+        expect(getMedianWordLength({ 4: 'anything', 5: 'anything', 42: 'anything', 100: 'anything' })).toEqual(24);
     });
 });
+
+// describe('getMedianWordLength', () => {
+
+//     test('returns 0 median word length for empty word array', () => {
+//         expect(getMedianWordLength([])).toBe(0);
+//     });
+
+//     test('gets correct median word length for text containing words of uniform length', () => {
+//         const text = Array(10).fill().map(() => faker.lorem.word(10));
+//         expect(getMedianWordLength(text)).toBe(10);
+//     });
+
+//     test('gets correct median word length for text containing words of varying length', () => {
+//         const words3 = Array(2).fill().map(() => faker.lorem.word(3));
+//         const words4 = Array(5).fill().map(() => faker.lorem.word(4));
+//         const words5 = Array(7).fill().map(() => faker.lorem.word(5));
+//         const text = [...words3, ...words4, ...words5];
+
+//         expect(getMedianWordLength(text)).toBe(4);
+//     });
+
+//     test('gets correct median word length for even number of word lengths', () => {
+//         const words3 = Array(2).fill().map(() => faker.lorem.word(3));
+//         const words4 = Array(5).fill().map(() => faker.lorem.word(4));
+//         const words5 = Array(3).fill().map(() => faker.lorem.word(5));
+//         const words6 = Array(4).fill().map(() => faker.lorem.word(6));
+//         const text = [...words3, ...words4, ...words5, ...words6];
+
+//         expect(getMedianWordLength(text)).toBe(5);
+//     });
+// });
 
 describe('getMostCommonLetter', () => {
 

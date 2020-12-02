@@ -4,34 +4,57 @@ export function getWordCount(words) {
     return words?.length ?? 0;
 }
 
-export function getMeanWordLength(words) {
+export function getMeanWordLength(wordLengthFreqs) {
     const roundedMean = pipe(
-        getWordLengthFreqs,
         computeMeanFromFreqs,
         roundToOneDp
-    )(words);
+    )(wordLengthFreqs);
 
     return roundedMean || 0;
 }
 
-export function getModalWordLength(words) {
-    const wordLengthFreqs = pipe(
-        getWordLengthFreqs,
-        takeKeysAtMaxFreq
-    )(words);
+// export function getMeanWordLength(words) {
+//     const roundedMean = pipe(
+//         getWordLengthFreqs,
+//         computeMeanFromFreqs,
+//         roundToOneDp
+//     )(words);
 
-    return (wordLengthFreqs.length > 0) ? wordLengthFreqs : [0]
+//     return roundedMean || 0;
+// }
+
+export function getModalWordLength(wordLengthFreqs) {
+    const modeValues = takeKeysAtMaxFreq(wordLengthFreqs);
+
+    return (modeValues.length > 0) ? modeValues : [0]
 }
+// export function getModalWordLength(words) {
+//     const wordLengthFreqs = pipe(
+//         getWordLengthFreqs,
+//         takeKeysAtMaxFreq
+//     )(words);
 
-export function getMedianWordLength(words) {
+//     return (wordLengthFreqs.length > 0) ? wordLengthFreqs : [0]
+// }
+
+export function getMedianWordLength(wordLengthFreqs) {
     const median = pipe(
-        getWordLengthFreqs,
         getWordLengths,
         computeMedian
-    )(words);
+    )(wordLengthFreqs);
 
     return median || 0;
 }
+
+// export function getMedianWordLength(words) {
+//     const median = pipe(
+//         getWordLengthFreqs,
+//         getWordLengths,
+//         computeMedian
+//     )(words);
+
+//     return median || 0;
+// }
 
 export function getMostCommonLetter(letters) {
     return pipe(
@@ -82,7 +105,12 @@ function getStringFreqs(strings) {
     }, {});
 }
 
-function getWordLengthFreqs(words) {
+export function getWordLengthFreqs(words) {
+
+    if (!Array.isArray(words)) {
+        return {};
+    }
+
     return words.reduce((wordLengthFreqs, word) => {
         (word.length in wordLengthFreqs) ? wordLengthFreqs[word.length]++ : wordLengthFreqs[word.length] = 1
         return wordLengthFreqs;

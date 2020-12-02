@@ -4,6 +4,18 @@ export function getWordCount(words) {
     return words?.length ?? 0;
 }
 
+export function getWordLengthFreqs(words) {
+
+    if (!Array.isArray(words)) {
+        return {};
+    }
+
+    return words.reduce((wordLengthFreqs, word) => {
+        (word.length in wordLengthFreqs) ? wordLengthFreqs[word.length]++ : wordLengthFreqs[word.length] = 1
+        return wordLengthFreqs;
+    }, {});
+}
+
 export function getMeanWordLength(wordLengthFreqs) {
     const roundedMean = pipe(
         computeMeanFromFreqs,
@@ -13,48 +25,20 @@ export function getMeanWordLength(wordLengthFreqs) {
     return roundedMean || 0;
 }
 
-// export function getMeanWordLength(words) {
-//     const roundedMean = pipe(
-//         getWordLengthFreqs,
-//         computeMeanFromFreqs,
-//         roundToOneDp
-//     )(words);
-
-//     return roundedMean || 0;
-// }
-
 export function getModalWordLength(wordLengthFreqs) {
     const modeValues = takeKeysAtMaxFreq(wordLengthFreqs);
 
     return (modeValues.length > 0) ? modeValues : [0]
 }
-// export function getModalWordLength(words) {
-//     const wordLengthFreqs = pipe(
-//         getWordLengthFreqs,
-//         takeKeysAtMaxFreq
-//     )(words);
-
-//     return (wordLengthFreqs.length > 0) ? wordLengthFreqs : [0]
-// }
 
 export function getMedianWordLength(wordLengthFreqs) {
     const median = pipe(
-        getWordLengths,
+        getWordLengths, // this may not have been in sorted order 
         computeMedian
     )(wordLengthFreqs);
 
     return median || 0;
 }
-
-// export function getMedianWordLength(words) {
-//     const median = pipe(
-//         getWordLengthFreqs,
-//         getWordLengths,
-//         computeMedian
-//     )(words);
-
-//     return median || 0;
-// }
 
 export function getMostCommonLetter(letters) {
     return pipe(
@@ -64,14 +48,29 @@ export function getMostCommonLetter(letters) {
 }
 
 export function getMostCommonWord(words) {
+    return getMostCommonWords(words)
+}
+
+export function getMostCommonWords(words) {
     return pipe(
         getStringFreqs,
-        takeKeysAtMaxFreq
+        getKeysSortedByValue
     )(words);
 }
 
+function getKeysSortedByValue(obj) {
+    return Object.entries(obj).sort(([_k1, val1], [_k2, val2]) => {
+        return val2 - val1;
+    }).reduce((acc, curr) => {
+        acc.push(curr[0]);
+        return acc;
+    }, []);
+}
+
+// TODO: SHOULD THIS BE EXPORTED??
 function getWordLengths(wordLengthFreqs) {
-    return Object.keys(wordLengthFreqs)
+    // object keys is not necessarily sorted - thought it was...
+    return Object.keys(wordLengthFreqs);
 }
 
 function roundToOneDp(num) {
@@ -98,22 +97,10 @@ function computeMedian(values) {
 }
 
 function getStringFreqs(strings) {
-    return strings.reduce((letterFreqs, lttr) => {
-        const letter = lttr.toLowerCase();
-        (letter in letterFreqs) ? letterFreqs[letter]++ : letterFreqs[letter] = 1;
-        return letterFreqs;
-    }, {});
-}
-
-export function getWordLengthFreqs(words) {
-
-    if (!Array.isArray(words)) {
-        return {};
-    }
-
-    return words.reduce((wordLengthFreqs, word) => {
-        (word.length in wordLengthFreqs) ? wordLengthFreqs[word.length]++ : wordLengthFreqs[word.length] = 1
-        return wordLengthFreqs;
+    return strings.reduce((stringFreqs, str) => {
+        const string = str.toLowerCase();
+        (string in stringFreqs) ? stringFreqs[string]++ : stringFreqs[string] = 1;
+        return stringFreqs;
     }, {});
 }
 

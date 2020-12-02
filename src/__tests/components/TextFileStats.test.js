@@ -10,6 +10,7 @@ jest.mock('../../modules/statistics.js', () => {
         getModalWordLength: () => 'MOCK_MODAL_WORD_LENGTH',
         getMedianWordLength: () => 'MOCK_MEDIAN_WORD_LENGTH',
         getMostCommonLetter: () => 'MOCK_MOST_COMMON_LETTER',
+        getMostCommonWords: () => 'MOCK_MOST_COMMON_WORDS',
     }
 });
 

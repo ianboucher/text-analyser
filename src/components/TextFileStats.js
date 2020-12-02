@@ -29,6 +29,13 @@ export default function TextFileStats(props) {
     return (
         <div files={files} id={id} data-testid={id} className="TestFileStats-grid">
 
+            <div id="most-common-words" data-testid="most-common-words" className="TestFileStats-grid-item-full-width">
+                <Stat
+                    statName={"Most Common Words"}
+                    statValue={getMostCommonWords(words).slice(0, 5)}
+                />
+            </div>
+
             <div id="word-count" data-testid="word-count" className="TestFileStats-grid-item">
                 <Stat
                     statName={"Total Word Count"}
@@ -68,13 +75,6 @@ export default function TextFileStats(props) {
                 <Stat
                     statName={"Most Common Letter"}
                     statValue={getMostCommonLetter(letters)}
-                />
-            </div>
-
-            <div id="most-common-words" data-testid="most-common-words" className="TestFileStats-grid-item">
-                <Stat
-                    statName={"Most Common Letter"}
-                    statValue={getMostCommonWords(words).slice(4)}
                 />
             </div>
         </div >

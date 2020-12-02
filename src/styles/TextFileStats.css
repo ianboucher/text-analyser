@@ -12,6 +12,11 @@
     width: calc(33% - 1rem);
 }
 
+.TestFileStats-grid-item-full-width {
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
 @media (max-width: 720px) {
     .TestFileStats-grid-item {
         width: calc(50% - 1rem);

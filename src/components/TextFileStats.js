@@ -74,7 +74,7 @@ export default function TextFileStats(props) {
             <div id="most-common-words" data-testid="most-common-words" className="TestFileStats-grid-item">
                 <Stat
                     statName={"Most Common Letter"}
-                    statValue={getMostCommonWords(words)}
+                    statValue={getMostCommonWords(words).slice(4)}
                 />
             </div>
         </div >
